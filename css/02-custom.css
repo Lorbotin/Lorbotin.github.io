@@ -1,0 +1,173 @@
+/* ============================================================
+ * custom.css —— Butterfly 主题自定义美化样式
+ * 放置位置：<博客根目录>/source/css/custom.css
+ * 加载方式：见 01-config-snippets.md 中的 inject.head 配置
+ * 命名前缀 nb- (nice-blog)，避免与主题冲突
+ * ============================================================ */
+
+/* ---------- 基础变量（自动跟随明暗主题） ---------- */
+:root {
+  --nb-radius: 12px;
+  --nb-shadow: 0 4px 12px rgba(0, 0, 0, .08);
+}
+[data-theme="dark"] {
+  --nb-shadow: 0 4px 12px rgba(0, 0, 0, .4);
+}
+
+/* ============================================================
+ * 一、提示 / 警告面板  {% notice %}
+ * ============================================================ */
+.nb-notice {
+  margin: 1rem 0;
+  padding: .9rem 1.1rem;
+  border-radius: var(--nb-radius);
+  border: 1px solid transparent;
+  box-shadow: var(--nb-shadow);
+  font-size: .95em;
+}
+.nb-notice-head {
+  display: flex;
+  align-items: center;
+  gap: .45em;
+  font-weight: 700;
+  margin-bottom: .35rem;
+}
+.nb-notice-body p { margin: .2rem 0; }
+.nb-notice-body ul { margin: .2rem 0; padding-left: 1.4em; }
+
+/* 五种配色：info / tip / success / warning / danger */
+.nb-info    { background: #eef6ff; border-color: #9ecbff; color: #1c4e80; }
+.nb-tip     { background: #effaf3; border-color: #a4e0b8; color: #1e6b3a; }
+.nb-success { background: #effaf3; border-color: #7ddb99; color: #146c2e; }
+.nb-warning { background: #fff8e6; border-color: #ffd98a; color: #8a5a00; }
+.nb-danger  { background: #fdeeee; border-color: #f5b0b0; color: #a11b1b; }
+
+/* 暗色模式适配 */
+[data-theme="dark"] .nb-info    { background: #12283d; border-color: #2c5a8a; color: #a8d4ff; }
+[data-theme="dark"] .nb-tip     { background: #10281a; border-color: #2f6b44; color: #9fe0b8; }
+[data-theme="dark"] .nb-success { background: #10281a; border-color: #2c7a45; color: #9fe0b8; }
+[data-theme="dark"] .nb-warning { background: #33270d; border-color: #7a5c1e; color: #ffd98a; }
+[data-theme="dark"] .nb-danger  { background: #331313; border-color: #7a2c2c; color: #ffb0b0; }
+
+/* ============================================================
+ * 二、公告置顶面板  {% announce %}
+ * ============================================================ */
+.nb-announce {
+  position: relative;
+  margin: 1rem 0;
+  padding: 1rem 1.2rem;
+  border-radius: var(--nb-radius);
+  background: linear-gradient(135deg, #eef4ff 0%, #f7f0ff 100%);
+  border-left: 4px solid #5b8def;
+  box-shadow: var(--nb-shadow);
+}
+.nb-announce-title {
+  font-weight: 800;
+  color: #3a6bd6;
+  margin-bottom: .3rem;
+}
+.nb-announce-body p { margin: .25rem 0; }
+[data-theme="dark"] .nb-announce {
+  background: linear-gradient(135deg, #17263d 0%, #241a3d 100%);
+  border-left-color: #5b8def;
+}
+[data-theme="dark"] .nb-announce-title { color: #8fb4ff; }
+
+/* ============================================================
+ * 三、信息卡片  {% infocard %}
+ * ============================================================ */
+.nb-infocard {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  max-width: 420px;
+  margin: 1.2rem 0;
+  padding: .9rem;
+  border-radius: var(--nb-radius);
+  background: var(--card-bg, #fff);
+  border: 1px solid var(--card-border-color, #e8e8e8);
+  box-shadow: var(--nb-shadow);
+  transition: transform .25s, box-shadow .25s;
+  color: inherit;
+  text-decoration: none;
+}
+.nb-infocard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, .14);
+  text-decoration: none;
+}
+.nb-infocard-img {
+  width: 72px;
+  height: 72px;
+  border-radius: 10px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+.nb-infocard-title {
+  font-weight: 700;
+  font-size: 1.05em;
+  margin-bottom: .25rem;
+  color: var(--font-color, #333);
+}
+.nb-infocard-desc {
+  font-size: .88em;
+  color: #888;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ============================================================
+ * 四、标签徽章  {% badge %}
+ * ============================================================ */
+.nb-badge {
+  display: inline-block;
+  padding: .12em .6em;
+  border-radius: 999px;
+  font-size: .78em;
+  font-weight: 600;
+  vertical-align: middle;
+  line-height: 1.6;
+  transform: translateY(-1px);
+}
+
+/* ============================================================
+ * 五、侧边栏美化（卡片悬浮、头像、公告卡片）
+ * ============================================================ */
+/* 侧边栏卡片悬浮效果 */
+#aside-content .card-widget {
+  transition: transform .3s, box-shadow .3s;
+}
+#aside-content .card-widget:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, .12);
+}
+
+/* 头像悬浮旋转（可选，不需要可删掉这一段） */
+#aside-content .avatar-img {
+  transition: transform .6s ease;
+}
+#aside-content .card-info:hover .avatar-img {
+  transform: rotate(360deg) scale(1.05);
+}
+
+/* 侧边栏公告字体微调 */
+#aside-content .card-announcement .item-headline { font-weight: 700; }
+
+/* ============================================================
+ * 六、正文细节美化
+ * ============================================================ */
+/* 表格在窄屏可横向滚动 */
+.post-content table {
+  display: block;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+/* 引用块左边线 */
+.post-content blockquote {
+  border-left: 4px solid #5b8def;
+  background: rgba(91, 141, 239, .06);
+  border-radius: 0 8px 8px 0;
+}
