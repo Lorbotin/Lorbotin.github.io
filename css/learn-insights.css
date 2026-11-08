@@ -1,0 +1,66 @@
+/* =========================================================
+ * Butterfly 自定义样式（增量补充）
+ * 放置位置：<博客根目录>/source/css/learn-insights.css
+ * 并在 _config.butterfly.yml 的 inject 处引入，见下方说明
+ * ========================================================= */
+
+/* ---------- 1. note 提示面板：圆角 + 左侧彩条 ---------- */
+.note {
+  border-radius: 12px;
+  border: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  padding: 14px 18px;
+}
+
+.note:not(.no-icon)::before {
+  font-size: 1.1em;
+}
+
+/* ---------- 2. collapse 折叠卡片 ---------- */
+.collapse {
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  margin: 1em 0;
+  overflow: hidden;
+}
+
+.collapse .collapse-title {
+  font-weight: 600;
+}
+
+/* ---------- 3. 行内代码：淡淡的底色胶囊 ---------- */
+#article-container code:not([class]) {
+  background: rgba(64, 120, 255, 0.08);
+  color: #2f6bd8;
+  padding: 2px 6px;
+  border-radius: 6px;
+}
+
+/* 暗色模式下同样适配（Butterfly 暗色为 data-theme="dark"） */
+[data-theme="dark"] #article-container code:not([class]) {
+  background: rgba(120, 170, 255, 0.15);
+  color: #9ec3ff;
+}
+
+/* ---------- 4. 标题左侧渐变装饰条 ---------- */
+#article-container h2 {
+  border-left: 4px solid #4a90d9;
+  padding-left: 12px;
+}
+
+/* ---------- 5. 「领悟」小结面板：紫金色收尾块 ---------- */
+#article-container .note.purple.modern {
+  background: linear-gradient(135deg, #f3ecff 0%, #fdf4e3 100%);
+  border-left: 4px solid #8a6fd8;
+}
+
+[data-theme="dark"] #article-container .note.purple.modern {
+  background: linear-gradient(135deg, #2c2440 0%, #3a3222 100%);
+  border-left-color: #b79bff;
+}
+
+/* ---------- 6. 代码块圆角 + 头部样式微调 ---------- */
+#article-container pre,
+#article-container .code-container {
+  border-radius: 10px;
+}
