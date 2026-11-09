@@ -1,18 +1,7 @@
-name: Deploy Hexo to GitHub Pages
-
+name: Hexo Auto Build & Deploy
 on:
   push:
-    branches: [main]
-  workflow_dispatch:
-
-permissions:
-  contents: write
-  pages: write
-  id-token: write
-
-concurrency:
-  group: pages
-  cancel-in-progress: false
+    branches: [ source ]
 
 jobs:
   build:
@@ -21,14 +10,12 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@v4
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          submodules: true
+          submodules: false
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
-          cache: npm
+          node-version: 18
 
       - name: Install dependencies
         run: |
@@ -36,7 +23,7 @@ jobs:
           npm install strip-ansi@6.0.1 --save-exact
 
       - name: Build Hexo
-        run: npx hexo clean && npx hexo g
+        run: npx hexo g
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
